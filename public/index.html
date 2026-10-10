@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<title>CRM CCTV · LV Seguridad Moreno</title>
+<style>
+:root{--bg:#0a0a0b;--s1:#141416;--s2:#1c1c1f;--ln:#2b2b30;--tx:#f5f5f6;--mu:#9b9ba4;--y:#ffc400;--yd:#e0ac00;--ok:#38d39f;--bad:#ff5c5c;--bl:#5ab0ff;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#000;border-bottom:3px solid var(--y)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{display:grid;place-items:center;width:40px;height:40px;background:var(--y);color:#000;font-weight:900;border-radius:8px;letter-spacing:-1px}
+.brand b{display:block;font-size:16px;letter-spacing:.5px;text-transform:uppercase}
+.brand small{color:var(--mu)}
+.right{display:flex;align-items:center;gap:10px}
+.badge{padding:4px 10px;border:1px solid var(--y);color:var(--y);border-radius:99px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+.btn{appearance:none;border:1px solid var(--ln);background:var(--s2);color:var(--tx);padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{border-color:var(--y)}
+.btn.y{background:var(--y);color:#000;border-color:var(--y)}
+.btn.y:hover{background:var(--yd)}
+.btn.sm{padding:6px 12px;font-size:13px}
+.btn.d{color:var(--bad)}
+.btn.on{background:var(--y);color:#000;border-color:var(--y)}
+.btn:disabled{opacity:.5;cursor:wait}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--s1);border:1px solid var(--ln);border-left:4px solid var(--y);border-radius:10px;padding:14px}
+.kpi span{color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.kpi b{display:block;font-size:30px;line-height:1.1;color:var(--y)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.bar input,.bar select{flex:1 1 150px}
+input,select,textarea{width:100%;background:var(--s2);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:10px 12px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--y);border-color:var(--y)}
+textarea{min-height:70px;resize:vertical}
+label{display:block;color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:var(--s1);border:1px solid var(--ln);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.card.click{cursor:pointer}
+.card.click:hover{border-color:var(--y)}
+.card h3,.card h4{margin:0}
+.card h4{color:var(--y);font-size:15px;text-transform:uppercase;letter-spacing:.6px}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.chip{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;border:1px solid}
+.e-pendiente{color:var(--y);border-color:var(--y)}
+.e-en_camino{color:var(--bl);border-color:var(--bl)}
+.e-en_curso{color:#000;background:var(--y);border-color:var(--y)}
+.e-instalado,.e-activo{color:var(--ok);border-color:var(--ok)}
+.e-cancelado,.e-inactivo{color:var(--bad);border-color:var(--bad)}
+.blk{background:var(--s2);border-radius:8px;padding:10px 12px}
+.blk p{margin:0;font-weight:600}
+.blk small{color:var(--mu);display:block}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.mu{color:var(--mu);font-size:13px;margin:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.empty{text-align:center;color:var(--mu);padding:50px 10px;border:1px dashed var(--ln);border-radius:12px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:20px 12px}
+.ov[hidden]{display:none}
+.mod{background:var(--s1);border:1px solid var(--y);border-radius:14px;width:100%;max-width:680px;padding:20px}
+.mod h2{margin:0 0 14px;font-size:18px;color:var(--y)}
+.f{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.f .w{grid-column:1/-1}
+.stack{display:flex;flex-direction:column;gap:16px;max-width:680px}
+.login{min-height:100vh;display:grid;place-items:center;padding:16px}
+.login .mod{max-width:400px}
+.err{color:var(--bad);font-size:13px;min-height:18px;margin:8px 0 0}
+@media(max-width:560px){.f{grid-template-columns:1fr}.top{padding:10px 12px}.brand small{display:none}}
+.alert{background:#2a2300;border:1px solid var(--yd);color:var(--y);padding:12px 16px;border-radius:10px;margin-bottom:16px;cursor:pointer;font-weight:600}
+.e-vencido{color:var(--bad);border-color:var(--bad)}
+.e-proximo{color:var(--y);border-color:var(--y)}
+.e-aldia{color:var(--ok);border-color:var(--ok)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--y);color:#000;padding:10px 18px;border-radius:8px;font-weight:700;z-index:20}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="modal" class="ov" hidden></div>
+<script>
+const $=s=>document.querySelector(s);
+const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const EST={pendiente:'Pendiente',en_camino:'En camino',en_curso:'Instalando',instalado:'Instalado',cancelado:'Cancelado'};
+const MARCAS=['Tiandy','Dahua','Imou','Hikvision','Otra'];
+const TIPOS=['Cámaras IP','Kit CCTV (DVR/NVR)','Cámara WiFi','Alarma','Control de acceso','Otro'];
+const FRANJAS=['Mañana','Tarde','A coordinar'];
+const NEXT={pendiente:['en_camino','Salir hacia el cliente'],en_camino:['en_curso','Comenzar instalación'],en_curso:['instalado','Marcar como instalado'],instalado:['en_curso','Reabrir']};
+let T=null,role=null,tab='jobs',cfgTab='negocio',itab='activos',status={},S={cfg:{},installers:[],jobs:[],maint:[],me:null,adminUser:''},f={q:'',e:'',i:''},fm={q:'',e:'',i:''},last='',toastT;
+try{T=localStorage.getItem('crm_t')}catch(e){}
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const wa=t=>{let d=(t||'').replace(/\D/g,'').replace(/^0+/,'');if(!d.startsWith('54'))d='54'+d;return 'https://wa.me/'+d};
+const maps=j=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent((j.direccion||'')+', '+(j.localidad||''));
+const fdate=d=>d?d.split('-').reverse().join('/'):'Sin fecha';
+const instName=id=>{const i=S.installers.find(x=>x.id===id);return i?i.nombre:(id?'Instalador eliminado':'Sin asignar')};
+function toast(m){clearTimeout(toastT);document.querySelectorAll('.toast').forEach(t=>t.remove());const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);toastT=setTimeout(()=>t.remove(),2600)}
+async function api(m,p,b){
+  const r=await fetch('/api/'+p,{method:m,headers:{'content-type':'application/json',...(T?{authorization:'Bearer '+T}:{})},body:b?JSON.stringify(b):undefined});
+  const d=await r.json().catch(()=>({}));
+  if(r.status===401&&T&&p!=='login'){logout();throw new Error('Sesión vencida')}
+  if(!r.ok)throw new Error(d.error||'Error');return d}
+function logout(){T=null;try{localStorage.removeItem('crm_t')}catch(e){}role=null;last='';tab='jobs';boot()}
+const v=id=>($('#'+id)||{}).value||'';
+const fld=(k,lb,t,val,w,ph)=>'<div'+(w?' class="w"':'')+'><label for="'+k+'">'+lb+'</label><input id="'+k+'" type="'+(t||'text')+'" value="'+E(val)+'"'+(ph?' placeholder="'+E(ph)+'"':'')+'></div>';
+const opts=(arr,sel)=>arr.map(x=>'<option'+(x===sel?' selected':'')+'>'+E(x)+'</option>').join('');
+async function act(btn,fn){if(btn)btn.disabled=true;try{await fn()}catch(e){toast(e.message)}finally{if(btn)btn.disabled=false}}
+
+// ---------- arranque y login ----------
+async function boot(){
+  try{status=await api('GET','status')}catch(e){$('#root').innerHTML='<div class="login"><div class="mod"><p>No se pudo conectar con el servidor.</p></div></div>';return}
+  document.title='CRM CCTV · '+status.negocio;
+  if(T){try{await load(true);return}catch(e){}}
+  loginView();
+}
+function loginView(){
+  const setup=!status.setup;
+  $('#root').innerHTML='<div class="login"><div class="mod"><div class="brand" style="margin-bottom:18px"><span class="logo">LV</span><div><b>'+E(status.negocio)+'</b><small>CRM CCTV</small></div></div><h2>'+(setup?'Configuración inicial':'Ingresar')+'</h2><div class="f">'+
+  (setup?fld('s-neg','Nombre del negocio','text',status.negocio,1):'')+fld('l-u',setup?'Usuario administrador':'Usuario','text','',1)+fld('l-p','Contraseña'+(setup?' (mín. 6)':''),'password','',1)+
+  '</div><p class="err" id="err"></p><button class="btn y" style="width:100%;margin-top:6px" id="go">'+(setup?'Crear administrador':'Entrar')+'</button></div></div>';
+  const go=async()=>{try{
+    if(setup){await api('POST','setup',{negocio:v('s-neg'),user:v('l-u'),password:v('l-p')});status.setup=true}
+    const d=await api('POST','login',{user:v('l-u'),password:v('l-p')});T=d.token;try{localStorage.setItem('crm_t',T)}catch(e){}
+    await load(true)}catch(e){$('#err').textContent=e.message}};
+  $('#go').onclick=go;$('#l-p').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+async function load(force){
+  const d=await api('GET','data');const k=JSON.stringify(d);
+  role=d.role;S={cfg:d.cfg||{},installers:d.installers||[],jobs:d.jobs||[],maint:d.maint||[],me:d.me||null,adminUser:d.adminUser||''};
+  if(force){shell();view();last=k;return}
+  if(k!==last){last=k;view()}
+}
+function shell(){
+  $('#root').innerHTML='<header class="top"><div class="brand"><span class="logo">'+E((S.cfg.negocio||'LV').slice(0,2).toUpperCase())+'</span><div><b>'+E(S.cfg.negocio||'LV Seguridad')+'</b><small>CRM CCTV</small></div></div><div class="right"><span class="badge">'+(role==='admin'?'Administrador':'Instalador')+'</span><button class="btn sm" data-a="out">Salir</button></div></header><main id="app"></main>';
+}
+function view(){
+  const a=$('#app');if(!a)return;
+  const na=mAlert(),ml='Mantenimientos'+(na?' ('+na+')':'');
+  const tabs=role==='admin'?[['jobs','Trabajos'],['mant',ml],['cfg','Configuración']]:[['jobs','Mis instalaciones'],['mant',ml],['cfg','Mi perfil']];
+  a.innerHTML='<div class="tabs">'+tabs.map(t=>'<button class="btn'+(tab===t[0]?' on':'')+'" data-a="tab" data-id="'+t[0]+'">'+t[1]+'</button>').join('')+'</div><div id="body"></div>';
+  const b=$('#body');
+  if(tab==='cfg')b.innerHTML=role==='admin'?cfgAdmin():cfgInst();
+  else if(tab==='mant'){if(role==='admin')adminMant(b);else b.innerHTML=instMant()}
+  else if(role==='admin'){adminJobs(b)}else b.innerHTML=instJobs();
+}
+setInterval(()=>{if(!T||!role||tab==='cfg'||!$('#modal').hidden||document.hidden)return;const el=document.activeElement;if(el&&/INPUT|TEXTAREA|SELECT/.test(el.tagName))return;load(false).catch(()=>{})},20000);
+
+// ---------- administrador: trabajos ----------
+const chip=e=>'<span class="chip e-'+e+'">'+E(EST[e]||e)+'</span>';
+const prod=j=>E([j.marca,j.tipo].filter(Boolean).join(' · '))+(j.cantidad?' × '+E(j.cantidad):'');
+function adminJobs(b){
+  const c=k=>S.jobs.filter(j=>k.includes(j.estado||'pendiente')).length;
+  b.innerHTML=mBanner()+'<div class="kpis">'+[['Total',S.jobs.length],['Pendientes',c(['pendiente'])],['En curso',c(['en_camino','en_curso'])],['Instalados',c(['instalado'])]].map(k=>'<div class="kpi"><span>'+k[0]+'</span><b>'+k[1]+'</b></div>').join('')+'</div>'+
+  '<div class="bar"><input id="q" placeholder="Buscar cliente, teléfono o dirección" value="'+E(f.q)+'"><select id="fe"><option value="">Todos los estados</option>'+Object.entries(EST).map(([k,x])=>'<option value="'+k+'"'+(f.e===k?' selected':'')+'>'+x+'</option>').join('')+'</select><select id="fi"><option value="">Todos los instaladores</option>'+S.installers.map(i=>'<option value="'+E(i.id)+'"'+(f.i===i.id?' selected':'')+'>'+E(i.nombre)+'</option>').join('')+'</select><button class="btn y" data-a="newjob">+ Nuevo trabajo</button></div><div class="grid" id="list"></div>';
+  $('#q').oninput=e=>{f.q=e.target.value.toLowerCase();jobList()};$('#fe').onchange=e=>{f.e=e.target.value;jobList()};$('#fi').onchange=e=>{f.i=e.target.value;jobList()};
+  jobList();
+}
+function jobList(){
+  const l=S.jobs.filter(j=>(!f.e||j.estado===f.e)&&(!f.i||j.instaladorId===f.i)&&(!f.q||[j.cliente,j.telefono,j.direccion,j.localidad].join(' ').toLowerCase().includes(f.q))).sort((a,b)=>(a.fecha||'9').localeCompare(b.fecha||'9'));
+  $('#list').innerHTML=l.length?l.map(j=>'<article class="card click" data-a="editjob" data-id="'+E(j.id)+'"><div class="row"><h3>'+E(j.cliente)+'</h3>'+chip(j.estado||'pendiente')+'</div><p class="mu">'+E(j.direccion)+(j.localidad?', '+E(j.localidad):'')+'</p><p class="mu">Tel. '+E(j.telefono)+'</p><div class="blk"><p>'+prod(j)+'</p></div><p class="mu">'+fdate(j.fecha)+(j.franja?' · '+E(j.franja):'')+' · '+E(instName(j.instaladorId))+'</p></article>').join(''):'<div class="empty" style="grid-column:1/-1">No hay trabajos todavía.<br>Cargá el primero con “Nuevo trabajo”.</div>';
+}
+function jobForm(id){
+  const j=S.jobs.find(x=>x.id===id)||{estado:'pendiente',fecha:today(),marca:'Tiandy',tipo:TIPOS[0],cantidad:'4',franja:FRANJAS[0]};
+  const ins=S.installers.filter(i=>i.activo!==false||i.id===j.instaladorId);
+  modal('<h2>'+(id?'Editar trabajo':'Nuevo trabajo')+'</h2><div class="f">'+fld('j-cliente','Cliente *','text',j.cliente,1)+fld('j-telefono','Teléfono *','tel',j.telefono)+fld('j-email','Email','email',j.email)+fld('j-direccion','Dirección *','text',j.direccion,1)+fld('j-localidad','Localidad / barrio','text',j.localidad)+fld('j-referencia','Referencia (entre calles, timbre)','text',j.referencia)+
+  '<div><label>Marca</label><select id="j-marca">'+opts(MARCAS,j.marca)+'</select></div><div><label>Tipo de producto</label><select id="j-tipo">'+opts(TIPOS,j.tipo)+'</select></div>'+fld('j-cantidad','Cantidad de cámaras / equipos','number',j.cantidad)+fld('j-monto','Monto a cobrar','number',j.monto)+
+  '<div class="w"><label>Detalle (modelos, accesorios, cableado)</label><textarea id="j-detalle">'+E(j.detalle)+'</textarea></div>'+fld('j-fecha','Fecha','date',j.fecha)+'<div><label>Franja</label><select id="j-franja">'+opts(FRANJAS,j.franja)+'</select></div>'+
+  '<div><label>Instalador</label><select id="j-instaladorId"><option value="">Sin asignar</option>'+ins.map(i=>'<option value="'+E(i.id)+'"'+(j.instaladorId===i.id?' selected':'')+'>'+E(i.nombre)+'</option>').join('')+'</select></div><div><label>Estado</label><select id="j-estado">'+Object.entries(EST).map(([k,x])=>'<option value="'+k+'"'+((j.estado||'pendiente')===k?' selected':'')+'>'+x+'</option>').join('')+'</select></div>'+
+  '<div class="w"><label>Indicaciones para el instalador</label><textarea id="j-notas">'+E(j.notas)+'</textarea></div></div>'+(j.notaInst?'<div class="blk" style="margin-top:12px"><label>Nota del instalador</label><p>'+E(j.notaInst)+'</p></div>':'')+
+  foot(id?'<button class="btn d" data-a="deljob" data-id="'+E(id)+'">Eliminar</button>':'','<button class="btn y" data-a="savejob" data-id="'+E(id||'')+'">Guardar</button>'));
+}
+const foot=(l,r)=>'<div class="acts" style="margin-top:16px;justify-content:space-between"><div class="acts" style="margin:0">'+l+'</div><div class="acts" style="margin:0"><button class="btn" data-a="close">Cancelar</button>'+r+'</div></div>';
+function modal(h){const m=$('#modal');m.hidden=false;m.innerHTML='<div class="mod">'+h+'</div>'}
+
+// ---------- configuración del administrador ----------
+function cfgAdmin(){
+  const t=[['negocio','Negocio'],['cuenta','Mi cuenta'],['inst','Instaladores']];
+  let h='<div class="tabs">'+t.map(x=>'<button class="btn sm'+(cfgTab===x[0]?' on':'')+'" data-a="ctab" data-id="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>';
+  if(cfgTab==='negocio')h+='<div class="card stack"><h4>Datos del negocio</h4><div class="f">'+fld('c-neg','Nombre del negocio','text',S.cfg.negocio,1)+fld('c-tel','Teléfono de contacto','tel',S.cfg.telefono)+fld('c-mail','Email','email',S.cfg.email)+'</div><div><button class="btn y" data-a="savecfg">Guardar</button></div></div>';
+  if(cfgTab==='cuenta')h+='<div class="card stack"><h4>Cuenta de administrador</h4><div class="f">'+fld('a-user','Usuario','text',S.adminUser,1)+fld('a-new','Contraseña nueva (opcional)','password','',0,'Dejar vacío para no cambiarla')+fld('a-cur','Contraseña actual *','password','')+'</div><p class="mu">Para guardar cualquier cambio de cuenta tenés que confirmar tu contraseña actual.</p><div><button class="btn y" data-a="saveadmin">Guardar</button></div></div>';
+  if(cfgTab==='inst')h+='<div class="bar"><button class="btn y" data-a="newinst">+ Nuevo instalador</button></div><div class="grid">'+(S.installers.length?S.installers.map(i=>'<article class="card click" data-a="editinst" data-id="'+E(i.id)+'"><div class="row"><h3>'+E(i.nombre)+'</h3><span class="chip e-'+(i.activo===false?'inactivo':'activo')+'">'+(i.activo===false?'Inactivo':'Activo')+'</span></div><p class="mu">Usuario: '+E(i.user)+'</p><p class="mu">Tel. '+E(i.telefono||'—')+(i.zona?' · Zona: '+E(i.zona):'')+'</p><p class="mu">'+S.jobs.filter(j=>j.instaladorId===i.id&&!['instalado','cancelado'].includes(j.estado)).length+' trabajos activos</p></article>').join(''):'<div class="empty" style="grid-column:1/-1">Todavía no cargaste instaladores.<br>Creá uno para poder asignarle trabajos.</div>')+'</div>';
+  return h;
+}
+function instForm(id){
+  const i=S.installers.find(x=>x.id===id)||{activo:true};
+  modal('<h2>'+(id?'Editar instalador':'Nuevo instalador')+'</h2><div class="f">'+fld('i-nombre','Nombre completo *','text',i.nombre,1)+fld('i-user','Usuario para ingresar *','text',i.user)+fld('i-pw',id?'Contraseña nueva':'Contraseña * (mín. 6)','password','',0,id?'Dejar vacío para no cambiarla':'')+fld('i-tel','Teléfono','tel',i.telefono)+fld('i-zona','Zona de trabajo','text',i.zona)+
+  '<div class="w"><label>Estado</label><select id="i-activo"><option value="1"'+(i.activo!==false?' selected':'')+'>Activo</option><option value="0"'+(i.activo===false?' selected':'')+'>Inactivo (no puede ingresar)</option></select></div></div>'+
+  foot(id?'<button class="btn d" data-a="delinst" data-id="'+E(id)+'">Eliminar</button>':'','<button class="btn y" data-a="saveinst" data-id="'+E(id||'')+'">Guardar</button>'));
+}
+
+// ---------- instalador ----------
+function instJobs(){
+  const act=S.jobs.filter(j=>!['instalado','cancelado'].includes(j.estado||'pendiente')),done=S.jobs.filter(j=>['instalado','cancelado'].includes(j.estado));
+  const l=(itab==='activos'?act:done).sort((x,y)=>(x.fecha||'9').localeCompare(y.fecha||'9'));
+  return mBanner()+'<div class="kpis"><div class="kpi"><span>Para hoy</span><b>'+act.filter(j=>j.fecha===today()).length+'</b></div><div class="kpi"><span>Pendientes</span><b>'+act.length+'</b></div><div class="kpi"><span>Finalizados</span><b>'+done.length+'</b></div></div><div class="tabs"><button class="btn sm'+(itab==='activos'?' on':'')+'" data-a="itab" data-id="activos">Activas</button><button class="btn sm'+(itab==='hechos'?' on':'')+'" data-a="itab" data-id="hechos">Finalizadas</button></div><div class="grid">'+(l.length?l.map(instCard).join(''):'<div class="empty" style="grid-column:1/-1">No tenés instalaciones en esta lista.</div>')+'</div>';
+}
+function instCard(j){const e=j.estado||'pendiente',n=NEXT[e];
+  return '<article class="card"><div class="row"><h3>'+E(j.cliente)+'</h3>'+chip(e)+'</div><p class="mu">'+fdate(j.fecha)+(j.fecha===today()?' (hoy)':'')+(j.franja?' · '+E(j.franja):'')+'</p>'+
+  '<div class="blk"><label>Dirección</label><p>'+E(j.direccion)+(j.localidad?', '+E(j.localidad):'')+'</p>'+(j.referencia?'<small>'+E(j.referencia)+'</small>':'')+'<div class="acts"><a class="btn y sm" target="_blank" rel="noopener" href="'+maps(j)+'">Cómo llegar</a></div></div>'+
+  '<div class="blk"><label>Teléfono</label><p>'+E(j.telefono)+'</p><div class="acts"><a class="btn y sm" href="tel:'+E((j.telefono||'').replace(/[^\d+]/g,''))+'">Llamar</a><a class="btn sm" target="_blank" rel="noopener" href="'+wa(j.telefono)+'">WhatsApp</a></div></div>'+
+  '<div class="blk"><label>Producto a instalar</label><p>'+prod(j)+'</p>'+(j.detalle?'<small>'+E(j.detalle)+'</small>':'')+(j.monto?'<small>A cobrar: $'+E(j.monto)+'</small>':'')+'</div>'+
+  (j.notas?'<p class="mu"><b>Indicaciones:</b> '+E(j.notas)+'</p>':'')+
+  '<div><label>Mi nota de obra</label><textarea id="n-'+E(j.id)+'">'+E(j.notaInst||'')+'</textarea></div>'+
+  '<div class="acts"><button class="btn sm" data-a="note" data-id="'+E(j.id)+'">Guardar nota</button>'+(n?'<button class="btn y sm" data-a="st" data-id="'+E(j.id)+'" data-v="'+n[0]+'">'+n[1]+'</button>':'')+'</div></article>'}
+function cfgInst(){const m=S.me||{};
+  return '<div class="card stack"><h4>Mi perfil</h4><div class="f">'+fld('m-nombre','Nombre','text',m.nombre,1)+fld('m-tel','Teléfono','tel',m.telefono)+'<div><label>Usuario</label><input value="'+E(m.user)+'" disabled></div>'+fld('m-new','Contraseña nueva (opcional)','password','',0,'Dejar vacío para no cambiarla')+fld('m-cur','Contraseña actual (si cambiás la contraseña)','password','',1)+'</div><div><button class="btn y" data-a="savemi">Guardar</button></div></div>';
+}
+
+// ---------- mantenimientos ----------
+const pad=n=>String(n).padStart(2,'0');
+const addYear=d=>{const [y,m,dd]=d.split('-').map(Number);const t=new Date(Date.UTC(y+1,m-1,dd));if(t.getUTCMonth()!==m-1)t.setUTCDate(0);return t.getUTCFullYear()+'-'+pad(t.getUTCMonth()+1)+'-'+pad(t.getUTCDate())};
+const dayDiff=(a,b)=>Math.round((Date.parse(a)-Date.parse(b))/864e5);
+const mState=m=>{if(m.activo===false)return 'inactivo';const d=dayDiff(m.proximoMantenimiento||'9999-12-31',today());return d<0?'vencido':d<=30?'proximo':'aldia'};
+const MST={vencido:'Vencido',proximo:'Próximo',aldia:'Al día',inactivo:'Inactivo'};
+const mChip=m=>{const s=mState(m);return '<span class="chip e-'+s+'">'+MST[s]+'</span>'};
+const rel=m=>{const d=dayDiff(m.proximoMantenimiento,today());return d<0?'Vencido hace '+(-d)+(d===-1?' día':' días'):d===0?'Vence hoy':'En '+d+(d===1?' día':' días')};
+const equip=m=>E([m.marca,m.tipo].filter(Boolean).join(' · '))+(m.cantidad?' × '+E(m.cantidad):'');
+const mAlert=()=>S.maint.filter(m=>['vencido','proximo'].includes(mState(m))).length;
+const mBanner=()=>{const n=mAlert();return n?'<div class="alert" data-a="gomaint">Mantenimientos para atender: '+n+' (vencidos o que vencen en los próximos 30 días). Tocá para verlos.</div>':''};
+const waRem=m=>wa(m.telefono)+'?text='+encodeURIComponent('Hola '+m.cliente+', te escribimos de '+(S.cfg.negocio||'LV Seguridad')+'. Se cumple un año de la instalación de tu sistema de cámaras de seguridad y llegó el momento del mantenimiento anual (limpieza de lentes, revisión de la grabación, disco y conexiones). ¿Coordinamos una visita?');
+const calLink=m=>{const d=m.fechaVisita||m.proximoMantenimiento||today();const a=d.replace(/-/g,'');const n=new Date(Date.parse(d)+864e5).toISOString().slice(0,10).replace(/-/g,'');
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Mantenimiento CCTV · '+m.cliente)+'&dates='+a+'/'+n+'&details='+encodeURIComponent('Tel. '+m.telefono+' · Equipo: '+[m.marca,m.tipo].filter(Boolean).join(' · '))+'&location='+encodeURIComponent((m.direccion||'')+', '+(m.localidad||''))};
+
+function adminMant(b){
+  const c=k=>S.maint.filter(m=>mState(m)===k).length;
+  b.innerHTML='<div class="kpis">'+[['Vencidos',c('vencido')],['Próximos 30 días',c('proximo')],['Al día',c('aldia')],['Total',S.maint.length]].map(k=>'<div class="kpi"><span>'+k[0]+'</span><b>'+k[1]+'</b></div>').join('')+'</div>'+
+  '<div class="bar"><input id="mq" placeholder="Buscar cliente, teléfono o dirección" value="'+E(fm.q)+'"><select id="mfe"><option value="">Todos los estados</option>'+Object.entries(MST).map(([k,x])=>'<option value="'+k+'"'+(fm.e===k?' selected':'')+'>'+x+'</option>').join('')+'</select><select id="mfi"><option value="">Todos los instaladores</option>'+S.installers.map(i=>'<option value="'+E(i.id)+'"'+(fm.i===i.id?' selected':'')+'>'+E(i.nombre)+'</option>').join('')+'</select><button class="btn y" data-a="newm">+ Nuevo mantenimiento</button></div><div class="grid" id="mlist"></div>';
+  $('#mq').oninput=e=>{fm.q=e.target.value.toLowerCase();mList()};$('#mfe').onchange=e=>{fm.e=e.target.value;mList()};$('#mfi').onchange=e=>{fm.i=e.target.value;mList()};
+  mList();
+}
+function mList(){
+  const l=S.maint.filter(m=>(!fm.e||mState(m)===fm.e)&&(!fm.i||m.instaladorId===fm.i)&&(!fm.q||[m.cliente,m.telefono,m.direccion,m.localidad].join(' ').toLowerCase().includes(fm.q))).sort((a,b)=>(a.proximoMantenimiento||'9').localeCompare(b.proximoMantenimiento||'9'));
+  $('#mlist').innerHTML=l.length?l.map(m=>'<article class="card click" data-a="editm" data-id="'+E(m.id)+'"><div class="row"><h3>'+E(m.cliente)+'</h3>'+mChip(m)+'</div><p class="mu">'+E(m.direccion)+(m.localidad?', '+E(m.localidad):'')+'</p><p class="mu">Tel. '+E(m.telefono)+'</p><div class="blk"><p>'+equip(m)+'</p><small>Instalado: '+fdate(m.fechaInstalacion)+(m.ultimoMantenimiento?' · Último mant.: '+fdate(m.ultimoMantenimiento):'')+'</small></div><p class="mu"><b>Próximo: '+fdate(m.proximoMantenimiento)+'</b> · '+(m.activo===false?'Inactivo':rel(m))+'</p>'+(m.fechaVisita?'<p class="mu">Visita agendada: '+fdate(m.fechaVisita)+'</p>':'')+'<p class="mu">'+E(instName(m.instaladorId))+'</p></article>').join(''):'<div class="empty" style="grid-column:1/-1">Todavía no hay mantenimientos.<br>Se crean solos cuando una instalación se marca como instalada. Para clientes anteriores, usá “Nuevo mantenimiento”.</div>';
+}
+function mForm(id){
+  const m=S.maint.find(x=>x.id===id)||{marca:'Tiandy',tipo:TIPOS[0],cantidad:'4',fechaInstalacion:today(),activo:true};
+  const ins=S.installers.filter(i=>i.activo!==false||i.id===m.instaladorId);
+  const hist=(m.historial||[]).slice().reverse();
+  modal('<h2>'+(id?'Mantenimiento · '+E(m.cliente):'Nuevo mantenimiento')+'</h2>'+(id?'<div class="acts" style="margin:0 0 14px"><a class="btn y sm" target="_blank" rel="noopener" href="'+waRem(m)+'">Recordar por WhatsApp</a><a class="btn sm" href="tel:'+E((m.telefono||'').replace(/[^\d+]/g,''))+'">Llamar</a><a class="btn sm" target="_blank" rel="noopener" href="'+calLink(m)+'">Agregar al calendario</a><button class="btn sm" data-a="mdone" data-id="'+E(id)+'">Registrar mantenimiento hecho</button></div>':'')+
+  '<div class="f">'+fld('mt-cliente','Cliente *','text',m.cliente,1)+fld('mt-telefono','Teléfono *','tel',m.telefono)+fld('mt-localidad','Localidad / barrio','text',m.localidad)+fld('mt-direccion','Dirección *','text',m.direccion,1)+fld('mt-referencia','Referencia (entre calles, timbre)','text',m.referencia,1)+
+  '<div><label>Marca</label><select id="mt-marca">'+opts(MARCAS,m.marca)+'</select></div><div><label>Tipo de producto</label><select id="mt-tipo">'+opts(TIPOS,m.tipo)+'</select></div>'+fld('mt-cantidad','Cantidad de cámaras / equipos','number',m.cantidad)+
+  '<div class="w"><label>Detalle del equipo</label><textarea id="mt-detalle">'+E(m.detalle)+'</textarea></div>'+fld('mt-fechaInstalacion','Fecha de instalación *','date',m.fechaInstalacion)+fld('mt-proximoMantenimiento','Próximo mantenimiento (vacío = 1 año después)','date',m.proximoMantenimiento)+fld('mt-fechaVisita','Visita agendada','date',m.fechaVisita)+
+  '<div><label>Instalador</label><select id="mt-instaladorId"><option value="">Sin asignar</option>'+ins.map(i=>'<option value="'+E(i.id)+'"'+(m.instaladorId===i.id?' selected':'')+'>'+E(i.nombre)+'</option>').join('')+'</select></div><div class="w"><label>Estado</label><select id="mt-activo"><option value="1"'+(m.activo!==false?' selected':'')+'>Activo</option><option value="0"'+(m.activo===false?' selected':'')+'>Inactivo (no contrata mantenimiento)</option></select></div>'+
+  '<div class="w"><label>Notas</label><textarea id="mt-notas">'+E(m.notas)+'</textarea></div></div>'+
+  (hist.length?'<div class="blk" style="margin-top:12px"><label>Historial de mantenimientos</label>'+hist.map(h=>'<p>'+fdate(h.fecha)+' · '+E(h.por)+'</p>'+(h.nota?'<small>'+E(h.nota)+'</small>':'')).join('')+'</div>':'')+
+  foot(id?'<button class="btn d" data-a="delm" data-id="'+E(id)+'">Eliminar</button>':'','<button class="btn y" data-a="savem" data-id="'+E(id||'')+'">Guardar</button>'));
+}
+function mDoneForm(id){
+  const m=S.maint.find(x=>x.id===id);if(!m)return;
+  modal('<h2>Mantenimiento realizado</h2><p class="mu" style="margin-bottom:12px">'+E(m.cliente)+'. Al guardar, el próximo mantenimiento se programa 1 año después de la fecha que indiques.</p><div class="f">'+fld('md-fecha','Fecha del mantenimiento','date',today(),1)+'<div class="w"><label>Qué se hizo / observaciones</label><textarea id="md-nota"></textarea></div></div>'+foot('','<button class="btn y" data-a="savemdone" data-id="'+E(id)+'">Guardar</button>'));
+}
+function instMant(){
+  const key=m=>m.fechaVisita||m.proximoMantenimiento||'9';
+  const l=S.maint.filter(m=>m.activo!==false).sort((a,b)=>key(a).localeCompare(key(b)));
+  return mBanner()+'<div class="grid">'+(l.length?l.map(m=>'<article class="card"><div class="row"><h3>'+E(m.cliente)+'</h3>'+mChip(m)+'</div><p class="mu"><b>Próximo: '+fdate(m.proximoMantenimiento)+'</b> · '+rel(m)+'</p>'+(m.fechaVisita?'<p class="mu">Visita agendada: '+fdate(m.fechaVisita)+'</p>':'')+
+  '<div class="blk"><label>Dirección</label><p>'+E(m.direccion)+(m.localidad?', '+E(m.localidad):'')+'</p>'+(m.referencia?'<small>'+E(m.referencia)+'</small>':'')+'<div class="acts"><a class="btn y sm" target="_blank" rel="noopener" href="'+maps(m)+'">Cómo llegar</a></div></div>'+
+  '<div class="blk"><label>Teléfono</label><p>'+E(m.telefono)+'</p><div class="acts"><a class="btn y sm" href="tel:'+E((m.telefono||'').replace(/[^\d+]/g,''))+'">Llamar</a><a class="btn sm" target="_blank" rel="noopener" href="'+waRem(m)+'">WhatsApp</a></div></div>'+
+  '<div class="blk"><label>Equipo instalado</label><p>'+equip(m)+'</p>'+(m.detalle?'<small>'+E(m.detalle)+'</small>':'')+'<small>Instalado: '+fdate(m.fechaInstalacion)+(m.ultimoMantenimiento?' · Último mant.: '+fdate(m.ultimoMantenimiento):'')+'</small></div>'+
+  (m.notas?'<p class="mu"><b>Notas:</b> '+E(m.notas)+'</p>':'')+'<div class="acts"><button class="btn y sm" data-a="mdone" data-id="'+E(m.id)+'">Registrar mantenimiento hecho</button></div></article>').join(''):'<div class="empty" style="grid-column:1/-1">No tenés mantenimientos asignados.</div>')+'</div>';
+}
+
+// ---------- eventos ----------
+const reload=async(msg)=>{await load(false);view();if(msg)toast(msg)};
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,id=t.dataset.id;
+  const done=m=>async()=>{$('#modal').hidden=true;last='';await load(false);view();toast(m)};
+  if(a==='out')logout();
+  else if(a==='tab'){tab=id;view()}
+  else if(a==='ctab'){cfgTab=id;view()}
+  else if(a==='itab'){itab=id;view()}
+  else if(a==='close')$('#modal').hidden=true;
+  else if(a==='newjob')jobForm();
+  else if(a==='editjob')jobForm(id);
+  else if(a==='newinst')instForm();
+  else if(a==='editinst')instForm(id);
+  else if(a==='savejob')act(t,async()=>{const b={};['cliente','telefono','email','direccion','localidad','referencia','marca','tipo','cantidad','monto','detalle','fecha','franja','instaladorId','estado','notas'].forEach(k=>b[k]=v('j-'+k));
+    await api(id?'PUT':'POST',id?'jobs/'+id:'jobs',b);await done('Guardado')()});
+  else if(a==='deljob'){if(t.dataset.ok)act(t,async()=>{await api('DELETE','jobs/'+id);await done('Eliminado')()});else{t.dataset.ok=1;t.textContent='¿Seguro? Tocá de nuevo'}}
+  else if(a==='saveinst')act(t,async()=>{await api(id?'PUT':'POST',id?'installers/'+id:'installers',{nombre:v('i-nombre'),user:v('i-user'),password:v('i-pw'),telefono:v('i-tel'),zona:v('i-zona'),activo:v('i-activo')==='1'});await done('Instalador guardado')()});
+  else if(a==='delinst'){if(t.dataset.ok)act(t,async()=>{await api('DELETE','installers/'+id);await done('Instalador eliminado')()});else{t.dataset.ok=1;t.textContent='¿Seguro? Sus trabajos quedan sin asignar'}}
+  else if(a==='savecfg')act(t,async()=>{await api('PUT','config',{negocio:v('c-neg'),telefono:v('c-tel'),email:v('c-mail')});await load(true);toast('Datos guardados')});
+  else if(a==='saveadmin')act(t,async()=>{await api('PUT','admin',{user:v('a-user'),password:v('a-new'),currentPassword:v('a-cur')});await load(false);view();toast('Cuenta actualizada')});
+  else if(a==='savemi')act(t,async()=>{await api('PUT','me',{nombre:v('m-nombre'),telefono:v('m-tel'),password:v('m-new'),currentPassword:v('m-cur')});await load(false);view();toast('Perfil actualizado')});
+  else if(a==='st')act(t,async()=>{await api('PATCH','jobs/'+id,{estado:t.dataset.v});await reload('Estado actualizado')});
+  else if(a==='note')act(t,async()=>{await api('PATCH','jobs/'+id,{notaInst:v('n-'+id)});toast('Nota guardada')});
+  else if(a==='gomaint'){tab='mant';view()}
+  else if(a==='newm')mForm();
+  else if(a==='editm')mForm(id);
+  else if(a==='mdone')mDoneForm(id);
+  else if(a==='savem')act(t,async()=>{const g=k=>v('mt-'+k).trim();const b={};
+    ['cliente','telefono','localidad','direccion','referencia','marca','tipo','cantidad','detalle','fechaInstalacion','proximoMantenimiento','fechaVisita','instaladorId','notas'].forEach(k=>b[k]=g(k));b.activo=g('activo')!=='0';
+    if(!b.cliente||!b.telefono||!b.direccion||!b.fechaInstalacion)throw new Error('Completá cliente, teléfono, dirección y fecha de instalación');
+    await api(id?'PUT':'POST',id?'maintenances/'+id:'maintenances',b);await done('Guardado')()});
+  else if(a==='delm'){if(t.dataset.ok)act(t,async()=>{await api('DELETE','maintenances/'+id);await done('Eliminado')()});else{t.dataset.ok=1;t.textContent='¿Seguro? Tocá de nuevo'}}
+  else if(a==='savemdone')act(t,async()=>{const r=await api('POST','maintenances/'+id+'/visit',{fecha:v('md-fecha'),nota:v('md-nota')});await done('Registrado. Próximo mantenimiento: '+fdate(r.proximo))()});
+});
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')e.target.hidden=true});
+boot();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
